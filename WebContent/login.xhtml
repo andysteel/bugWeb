@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>Login</title>
+</h:head>
+<h:body>
+	<h1>Login</h1>
+	<h:form>
+		<h:panelGrid>
+			<h:outputLabel value="Usuario: "/>
+			<h:inputText value="#{autenticadorMB.usuario}"/>
+			
+			<h:outputLabel value="Senha: "/>
+			<h:inputSecret value="#{autenticadorMB.senha}"/>
+			
+			<h:commandButton action="#{autenticadorMB.login}" value="login"/>
+		</h:panelGrid>
+		<!--<h:outputText value="Usuario ou senha incorretos!!" rendered="#{param.erro}" style="color: red"/>-->
+	</h:form>
+</h:body>
+</html>

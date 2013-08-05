@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>Bugs</title>
+</h:head>
+<h:body>
+	<ui:include src="/menu.xhtml"/>
+	
+	<hr/>
+	
+	<h1>Novo Bug</h1>
+	<h:form>
+		<h:panelGrid>
+			<h:inputHidden value="#{bugMB.bug.b_id}"/>
+			
+			<h:outputLabel value="Gravidade: "/>
+			<h:selectOneMenu value="#{bugMB.bug.gravidade}">
+				<f:selectItem itemLabel="Baixa" itemValue="Baixa"/>
+				<f:selectItem itemLabel="Media" itemValue="Media"/>
+				<f:selectItem itemLabel="Alta" itemValue="Alta"/>
+			</h:selectOneMenu>
+		
+		
+			<h:outputLabel value="Descrição: "/>
+			<h:inputTextarea value="#{bugMB.bug.descricao}"/>
+		
+			<h:outputLabel value="Projeto: "/>
+			<h:selectOneMenu value="#{bugMB.projetoId}">
+				<f:selectItems value="#{projetoMB.projetos}" var="projeto" 
+					itemLabel="#{projeto.nome}" itemValue="#{projeto.id}"/>
+			</h:selectOneMenu>
+			
+			<h:commandButton action="#{bugMB.salvar}" value="salver"/>
+		
+		</h:panelGrid>
+	</h:form>
+	
+	<hr/>
+	
+	<h1>Lista de Bugs</h1>
+	<h:dataTable value="#{bugMB.bugs}" var="bug" rendered="#{not empty bugMB.bugs}" border="1">
+		<h:column>
+			<f:facet name="header">ID</f:facet>
+			#{bug.b_id}
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">PROJETO</f:facet>
+			#{bug.projeto.nome}
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">GRAVIDADE</f:facet>
+			#{bug.gravidade}
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">DESCRIÇÂO</f:facet>
+			#{bug.descricao}
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">APAGAR</f:facet>
+			<h:form>
+				<h:commandLink action="#{bugMB.apaga(bug.b_id)}">apagar</h:commandLink>
+			</h:form>
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">EDITAR</f:facet>
+			<h:form>
+				<h:commandLink action="#{bugMB.buscaId(bug.b_id)}">editar</h:commandLink>
+			</h:form>
+		</h:column>
+	</h:dataTable>
+</h:body>
+</html>
